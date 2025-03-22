@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KrishiMitra 🌱 - A farmer's best friend</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+
+</head>
+<body>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Language Switcher -->
+        <div class="language-switcher">
+            <button class="lang-btn active" onclick="changeLanguage('en')">English</button>
+            <button class="lang-btn active" onclick="changeLanguage('hi')">हिन्दी</button>
+            <button class="lang-btn active" onclick="changeLanguage('mr')">मराठी</button>
+            <button class="lang-btn active" onclick="changeLanguage('ta')">தமிழ்</button>
+            <button class="lang-btn active" onclick="changeLanguage('pa')">ਪੰਜਾਬੀ</button>
+        </div>
+
+        <header>
+            <h1><i class="fas fa-tractor"></i>🌱 KrishiMitra </h1>
+        </header>
+        <nav>
+            <a href="#" class="nav-link"><i class="fas fa-home"></i> Home</a>
+            <a href="#" class="nav-link"><i class="fas fa-newspaper"></i> News</a>
+            <a href="#" class="nav-link"><i class="fas fa-phone"></i> Contact</a>
+        </nav>
+        <div class="container">
+    <!-- Form Section -->
+    <div class="form-container">
+        <h2 style="text-align: center; margin-bottom: 2rem;">
+            <i class="fas fa-calculator"></i> Crop Recommendation System
+        </h2>
+        <form id="cropForm", method="POST" action="/predict">
+            <div class="form-grid">
+                <div class="input-group">
+                    <label><i class="fas fa-flask"></i> Nitrogen (N)</label>
+                    <input type="number" name="nitrogen" step="0.1" required>
+                </div>
+                <div class="input-group">
+                    <label><i class="fas fa-flask"></i> Phosphorus (P)</label>
+                    <input type="number" name="phosphorus" step="0.1" required>
+                </div>
+                <div class="input-group">
+                    <label><i class="fas fa-flask"></i> Potassium (K)</label>
+                    <input type="number" name="potassium" step="0.1" required>
+                </div>
+                <div class="input-group">
+                    <label><i class="fas fa-ruler-combined"></i> pH Level</label>
+                    <input type="number" name="ph_level" step="0.1" min="0" max="14" required>
+                </div>
+                <div class="input-group">
+                    <label><i class="fas fa-ruler"></i> Area (hectares)</label>
+                    <input type="number" name="area" step="0.1" required>
+                </div>
+        
+                <div class="input-group">
+                    <label><i class="fas fa-calendar-check"></i> Sowing Month</label>
+                    <select name="sowing_month">
+                        <option value="">Select Month</option>
+                        <!-- Months populated via JS -->
+                    </select>
+                </div>
+            </div>
+        
+            <!-- New Grid for State, District, and Season -->
+            <div class="location-grid">
+                <div class="input-group">
+                    <label><i class="fas fa-map-marker-alt"></i> District</label>
+                    <select name="district" id="district">
+                        <option value="">Select District</option>
+                        <!-- District options here -->
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label><i class="fas fa-sun"></i> Season</label>
+                    <select name="season">
+                        <option value="">Select Season</option>
+                        <option value="Kharif">Kharif</option>
+                        <option value="Rabi">Rabi</option>
+                        <option value="Summer">Summer</option>
+                        <option value="Whole year">Whole Year</option>
+                    </select>
+                </div>
+            </div>
+        
+            <div style="text-align: center;">
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-calculator"></i> Get Recommendation
+                </button>
+            </div>
+        </form>
+            
+            <div>
+                
+            </div>
+        </form>        
+    </div>
+
+
+        <div class="image-container">
+            <img src="farmers.jpg" alt="Agriculture Image">
+            <img src="tractor.jpg" alt="Agriculture Image">
+            <img src="farm.jpg" alt="Agriculture Image">
+        </div>  
+    </div>
+
+    <div class="results-container">
+        <div class="results" id="results">
+            <h3>Preference 1</h3>
+            <p id="preferences-box">{{ prediction1 if prediction1 else "Waiting for prediction..." }}</p>
+        </div>
+    
+        <div class="results" id="results2">
+            <h3>Preference 2</h3>
+            <p id="preferences-box">{{ prediction2 if prediction2 else "Waiting for prediction..." }}</p>
+        </div>
+    
+        <div class="results" id="results3">
+            <h3>Preference 3</h3>
+            <p id="preferences-box">{{ prediction3 if prediction3 else "Waiting for prediction..." }}</p>
+        </div>
+    </div>  
+    
+            <div class="news-container">
+                <button class="arrow left-arrow" onclick="slideNews(-1)">&#10094;</button>
+            
+                <div class="news-ticker">
+                    <div class="news-item"><h3>Govt’s 2025 agri push: Cabinet extends two crop insurance schemes till 2025-26 with Rs 69,515.71 crore outlay</h3>
+                        <img src="news1.jpg" alt="News 1">
+                        <p>The Union Cabinet announced a total outlay of Rs 69,515.71 crore for the continuation of the Pradhan Mantri Fasal Bima Yojana and Restructured Weather Based Crop Insurance Scheme till 2025-26.</p></div>
+                    <div class="news-item"><h3>INDIA BUDGET India unveils long-term programmes to boost pulses, cotton output</h3>
+                        <img src="news2.jpg" alt="News 2">
+                        <p>In the Union Budget, Finance Minister Nirmala Sitharaman announced a six-year program to increase pulse production, aiming to reduce dependency on imports. This involves state agencies procuring crops like pigeon peas, black matpe, and red lentils at guaranteed prices. India, being the largest global importer of pulses, spent a record $5 billion on imports in 2024. The program also focuses on enhancing cotton production, particularly the extra-long staple variety, through research and development efforts. </p></div>
+                    <div class="news-item"><h3>March 2025: Ample Sugar Stocks Despite Lower Production</h3>
+                        <img src="news3.jpg" alt="News 3">
+                        <p>Industry reports indicate that India is set to begin the 2025-26 sugar season in October with sufficient opening stocks, despite lower-than-expected production and an export quantity of 1 million tons during the current season. The Indian Sugar & Bio-Energy Manufacturers Association (ISMA) highlighted that comfortable opening stocks of 5.4 million tons are adequate for domestic demand in October and November, ensuring the ability to meet both domestic needs and export commitments.</p></div>
+                    <div class="news-item"><h3>Onion and soyabean farmers demand measures to boost exports</h3>
+                        <img src="news4.jpg" alt="News 3">
+                        <p>As prices of onions and soyabean continue to fall in the Indian market, industry and farmers’ associations have increased pressure on the government to extend more support by reducing export duty on onions and offering incentives for export of soybean meal, a by-product of the process of extracting oil from soyabean.</p></div>
+                    <div class="news-item"><h3>Tamil Nadu announces special package for paddy growers, international exposure visit for farmers</h3>
+                        <img src="news4.jpg" alt="News 3">
+                        <p>Tamil Nadu government will implement a special package to increase the paddy area and food grain production during Kar, Kuruvai and Sornavari seasons, in 29 non-Cauvery Delta districts at an outlay of Rs 102 crore, state Agriculture Minister M R K Panneerslvam informed the Assembly on Saturday. The package includes a subsidy for machine planting and quality certified seeds to farmers. A similar package will be provided to farmers in the Delta districts to increase the area and food grain product.</p></div>
+                </div>
+            
+                <button class="arrow right-arrow" onclick="slideNews(1)">&#10095;</button>
+            </div>
+        <div class="footer">
+            <p>&copy; 2021 KrishiMitra. All Rights Reserved.</p>
+        </div>
+</body>
+</html>

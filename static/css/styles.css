@@ -1,0 +1,290 @@
+:root {
+    --primary-green: #27ae60;
+    --dark-green: #219a52;
+    --background-gradient: linear-gradient(135deg, #e3f2e1, #b8e994);
+    --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: var(--background-gradient);
+    line-height: 1.6;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+}
+
+.container {
+    display: flex;
+    width: 80%;
+    margin: 3% auto;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.form-container {
+    width: 48%;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+}
+
+
+.news-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1500px;
+    margin: 2rem auto;
+    padding: 2.5rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
+}
+
+.news-container img {
+    width: 70%;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.image-container {
+    width: 48%;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.image-container img {
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.form-grid, .location-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.input-group input, 
+.input-group select {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: var(--primary-green);
+    outline: none;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.form-row .input-group {
+    flex: 1;
+    min-width: 150px;
+}
+
+.crop-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    padding: 3rem;
+}
+
+.crop-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+    transition: transform 0.3s;
+}
+
+.crop-card:hover {
+    transform: translateY(-5px);
+}
+
+.crop-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.crop-name {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    text-align: center;
+    font-weight: 600;
+}
+
+.weather-input {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.language-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.lang-btn.active {
+    background: var(--dark-green);
+    transform: scale(1.05);
+}
+
+.results-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1500px;
+    margin: 2rem auto;
+    padding: 2.5rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
+}
+
+.results {
+    flex: 1;
+    margin: 0 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
+}
+
+@media (max-width: 992px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+    }
+
+    .form-container, .image-container {
+        width: 100%;
+    }
+
+    .results-container {
+        display: flex;
+        flex-direction: column; /* Changed from row to column for better content flow */
+        max-width: 1500px;
+        margin: 2rem auto;
+        padding: 2.5rem;
+        background: white;
+        border-radius: 15px;
+        box-shadow: var(--box-shadow);
+        overflow: visible; /* Ensure content doesn't get cut off */
+    }
+    
+    .results {
+        width: 100%; /* Use full width */
+        margin: 0.5rem 0; /* Adjusted vertical margins */
+        padding: 1.5rem; /* Increased padding */
+        background: white;
+        border-radius: 15px;
+        box-shadow: var(--box-shadow);
+        min-height: 200px; /* Ensure minimum height */
+        overflow: auto; /* Add scrolling if content overflows */
+    }
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #22bb5d;
+    padding: 1rem;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.nav-link {
+    color: rgb(3, 41, 28);
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+.footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    background: #22bb5d;
+    color: white;
+}
+
+.min-max-values {
+    margin: 1rem 0;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-green);
+}
+
+.min-max-value {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+
+
+html {
+    scroll-behavior: smooth;
+}

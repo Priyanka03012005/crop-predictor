@@ -1,0 +1,68 @@
+import flask as Flask
+from flask import Flask, render_template, request, jsonify
+import numpy as np
+import sklearn
+import pandas as pd
+import warnings
+import joblib
+
+warnings.filterwarnings('ignore')
+
+app = Flask(__name__, template_folder='C:/Users/Shreeya Shreenivas/OneDrive/Desktop/hackathon/templates')
+
+
+rf_model = joblib.load('rf_model.pkl')
+scaler = joblib.load('scaler.pkl')
+
+@app.route('/')
+def home():
+    return render_template('index(2).html')  # Render the HTML form
+
+@app.route('/predict')
+def predict():
+    
+    N = request.form['nitrogen']
+    P = request.form['phosphorus']
+    K = request.form['potassium']
+    area = request.form['area']
+    temp = request.form['Temperature']
+    ph = request.form['pH']
+    rain = request.form['Rainfall']
+    season = request.form['season']
+    if (season == 'kharif'):
+        s = 0
+    elif (season == 'rabi'):
+        s = 1
+    elif (season == 'Summer'):
+        s = 2
+    elif (season == 'Whole Year'):
+        s = 3
+        
+    
+    try:
+        N = float(N)  
+        P = float(P)  
+        K = float(K) 
+        area = float(area) 
+        temp = float(temp)  
+        ph = float(ph) 
+        rain = float(rain) 
+    except ValueError as e:
+        return jsonify({"error": "Invalid input, please enter valid numeric values."}), 400
+    
+    # Sample data for prediction (you can modify this part as per your needs)
+    test_sample = [[area, N, P, K, s, rain, temp, ph]]
+    
+    test_sample = np.array(test_sample).reshape(1, -1)
+    new_samples_scaled = scaler.transform(test_sample)
+    
+    # Make the prediction using the model
+    prediction = rf_model.predict(new_samples_scaled)[0]
+    
+    # Return the prediction as JSON
+    prediction = int(prediction)
+    return jsonify({'prediction': prediction})
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
